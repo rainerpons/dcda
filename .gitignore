@@ -1,0 +1,20 @@
+# Dependency directories
+node_modules/
+
+# Build files
+dist/
+
+# Environment files
+.env
+
+# Editor files
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Compiled TypeScript files
+*.js
+*.js.map
+*.d.ts
+*.js.map
