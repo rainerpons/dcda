@@ -1,3 +1,4 @@
+import { Checkbox, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import { cloneDeep } from 'lodash';
 import { useMemo, useState } from 'react';
 
@@ -21,33 +22,34 @@ const App = () => {
   }, [isInputChecked]);
 
   return (
-    <>
-      {/* Header */}
-      <h1>Don't Care + Didn't Ask</h1>
-      {/* Phrases */}
-      {LIST_OF_PHRASES.map(({ id, text }, textIndex) => (
-        <>
-          <input
-            id={`${id}`}
-            type="checkbox"
+    <Container>
+      {/* Heading */}
+      <Heading as="h1" mb="4" textAlign="center">Don't Care + Didn't Ask</Heading>
+      <Stack spacing={1} border="1px" borderColor="gray.200" p="6" boxShadow="lg">
+        <Heading as="h2" size="md">Craft the perfect message in just a few clicks!</Heading>
+        <Text mb="1" textColor="gray.500">
+          Select the phrases that resonate with you, and we'll compile them into a personalized message.
+        </Text>
+        {/* Phrases */}
+        {LIST_OF_PHRASES.map(({ id, text }, textIndex) => (
+          <Checkbox
+            key={`${id}`}
             checked={isInputChecked[textIndex]}
             onChange={() => handleChange(textIndex)}
-          />
-          <label htmlFor={`${id}`}>{text}</label>
-          <br />
-        </>
-      ))}
-      {/* Parsed text */}
-      <>
-        <br />
-        <label>Result: </label>
-        <span>{joinedPhrases}</span>
-      </>
-      {/* Description */}
-      <p className="footnote">
-        (Meme app based around the <a href="https://www.reddit.com/r/copypasta/comments/qmxadi" target="_blank">"don't care didn't ask"</a> copypasta.)
-      </p>
-    </>
+          >
+            {text}
+          </Checkbox>
+        ))}
+        {/* Parsed text */}
+        {joinedPhrases.length ? (
+          <Stack direction="row" align="center">
+            <Text>Result: {joinedPhrases}</Text>
+            {/* TODO: Implement copy functionality */}
+            {/* <Button size="sm">Copy</Button> */}
+          </Stack>
+        ) : null}
+      </Stack>
+    </Container>
   );
 };
 
