@@ -4,20 +4,18 @@ Meme app based around the ["don't care didn't ask"](https://www.reddit.com/r/cop
 
 ## Installation
 
+Clone the repository, navigate to the project directory, and then install dependencies.
+
 ```bash
-# Clone the repository
-git clone https://github.com/rainerpons/dcda.git
-
-# Navigate to the project directory
-cd dcda
-
-# Install dependencies
-npm i
+git clone https://github.com/rainerpons/dcda.git \
+&& cd dcda \
+&& npm install
 ```
 
 ## Usage
 
+Start the development server.
+
 ```bash
-# Start the development server
 npm start
 ```
