@@ -6,14 +6,9 @@ import { useMemo, useState } from 'react';
 import './App.css';
 import { LIST_OF_PHRASES } from './assets/list';
 
+// TODO: Document methods
 const App = () => {
   const [isInputChecked, setIsInputChecked] = useState<boolean[]>(new Array(LIST_OF_PHRASES.length).fill(false));
-
-  const handleChange = (index: number) => {
-    const clonedIsInputChecked = cloneDeep(isInputChecked);
-    clonedIsInputChecked[index] = !clonedIsInputChecked[index];
-    setIsInputChecked(clonedIsInputChecked);
-  };
 
   const joinedPhrases = useMemo(() => {
     return LIST_OF_PHRASES
@@ -21,6 +16,12 @@ const App = () => {
       .map(phrase => phrase.text)
       .join(' + ');
   }, [isInputChecked]);
+
+  const handleChange = (index: number) => {
+    const clonedIsInputChecked = cloneDeep(isInputChecked);
+    clonedIsInputChecked[index] = !clonedIsInputChecked[index];
+    setIsInputChecked(clonedIsInputChecked);
+  };
 
   const handleClick = () => navigator.clipboard.writeText(joinedPhrases);
 
