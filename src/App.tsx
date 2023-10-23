@@ -1,18 +1,14 @@
-import { Checkbox, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { CopyIcon } from '@chakra-ui/icons';
+import { Box, Button, Checkbox, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import { cloneDeep } from 'lodash';
 import { useMemo, useState } from 'react';
 
 import './App.css';
 import { LIST_OF_PHRASES } from './assets/list';
 
+// TODO: Document methods
 const App = () => {
   const [isInputChecked, setIsInputChecked] = useState<boolean[]>(new Array(LIST_OF_PHRASES.length).fill(false));
-
-  const handleChange = (index: number) => {
-    const clonedIsInputChecked = cloneDeep(isInputChecked);
-    clonedIsInputChecked[index] = !clonedIsInputChecked[index];
-    setIsInputChecked(clonedIsInputChecked);
-  };
 
   const joinedPhrases = useMemo(() => {
     return LIST_OF_PHRASES
@@ -20,6 +16,14 @@ const App = () => {
       .map(phrase => phrase.text)
       .join(' + ');
   }, [isInputChecked]);
+
+  const handleChange = (index: number) => {
+    const clonedIsInputChecked = cloneDeep(isInputChecked);
+    clonedIsInputChecked[index] = !clonedIsInputChecked[index];
+    setIsInputChecked(clonedIsInputChecked);
+  };
+
+  const handleClick = () => navigator.clipboard.writeText(joinedPhrases);
 
   return (
     <Container>
@@ -42,11 +46,16 @@ const App = () => {
         ))}
         {/* Parsed text */}
         {joinedPhrases.length ? (
-          <Stack direction="row" align="center">
-            <Text>Result: {joinedPhrases}</Text>
-            {/* TODO: Implement copy functionality */}
-            {/* <Button size="sm">Copy</Button> */}
-          </Stack>
+          <Box mt="1">
+            <Text mb="1">Result: {joinedPhrases}</Text>
+            <Button
+              size="sm"
+              leftIcon={<CopyIcon />}
+              onClick={handleClick}
+            >
+              Copy
+            </Button>
+          </Box>
         ) : null}
       </Stack>
     </Container>
