@@ -6,14 +6,26 @@ interface PhraseText {
 export const LIST_OF_PHRASES: PhraseText[] = [
   {
     id: 1,
-    text: "Don't care"
+    text: 'don\'t care'
   },
   {
     id: 2,
-    text: "Didn't ask"
+    text: 'didn\'t ask'
   },
   {
     id: 3,
-    text: "Cry about it"
+    text: 'cry about it'
+  },
+  {
+    id: 4,
+    text: 'stay mad'
+  },
+  {
+    id: 5,
+    text: 'get real'
+  },
+  {
+    id: 6,
+    text: 'L'
   }
 ];
