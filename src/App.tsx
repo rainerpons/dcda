@@ -1,4 +1,5 @@
-import { Checkbox, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { CopyIcon } from '@chakra-ui/icons';
+import { Box, Button, Checkbox, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import { cloneDeep } from 'lodash';
 import { useMemo, useState } from 'react';
 
@@ -21,6 +22,8 @@ const App = () => {
       .join(' + ');
   }, [isInputChecked]);
 
+  const handleClick = () => navigator.clipboard.writeText(joinedPhrases);
+
   return (
     <Container>
       {/* Heading */}
@@ -42,11 +45,16 @@ const App = () => {
         ))}
         {/* Parsed text */}
         {joinedPhrases.length ? (
-          <Stack direction="row" align="center">
-            <Text>Result: {joinedPhrases}</Text>
-            {/* TODO: Implement copy functionality */}
-            {/* <Button size="sm">Copy</Button> */}
-          </Stack>
+          <Box mt="1">
+            <Text mb="1">Result: {joinedPhrases}</Text>
+            <Button
+              size="sm"
+              leftIcon={<CopyIcon />}
+              onClick={handleClick}
+            >
+              Copy
+            </Button>
+          </Box>
         ) : null}
       </Stack>
     </Container>
